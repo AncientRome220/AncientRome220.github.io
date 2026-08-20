@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ancientrome220.github.io/sitemap-index.xml

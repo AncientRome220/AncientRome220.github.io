@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+import { messages, pageRoutes, routeFor, type Locale, type PageKey } from "../lib/i18n";
+import { profile, t } from "../lib/data";
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+}
+
+const { locale, page } = Astro.props;
+const msg = messages[locale];
+const title = page === "home" ? msg.siteName : `${msg.titles[page]} | ${t(profile.identity.name, locale)}`;
+const description = msg.descriptions[page];
+const canonical = new URL(routeFor(locale, page), Astro.site);
+const alternateLocale: Locale = locale === "ja" ? "en" : "ja";
+const sameAs = Object.entries(profile.identity.public_identifiers)
+  .filter(([key, value]) => key.endsWith("_url") && typeof value === "string")
+  .map(([, value]) => value);
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.identity.name.en,
+  alternateName: profile.identity.name.ja,
+  url: "https://ancientrome220.github.io/",
+  sameAs,
+  affiliation: {
+    "@type": "EducationalOrganization",
+    name: profile.current_affiliation.organization.en
+  },
+  knowsAbout: profile.profile.en.expertise
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#10233f" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ja" href={new URL(routeFor("ja", page), Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(routeFor("en", page), Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(routeFor("ja", page), Astro.site)} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <title>{title}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personLd)} />
+  </head>
+  <body class:list={[page === "cv" && "cv-page"]}>
+    <a class="skip-link" href="#main">{msg.skip}</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href={pageRoutes[locale].home}>
+          <span class="wordmark-name">{t(profile.identity.name, locale)}</span>
+          <span class="wordmark-field">{locale === "ja" ? "古代史・デジタル人文学" : "Ancient History · Digital Humanities"}</span>
+        </a>
+        <nav aria-label={locale === "ja" ? "主要ナビゲーション" : "Primary navigation"}>
+          <ul>
+            {Object.entries(msg.nav).map(([key, label]) => (
+              <li><a href={pageRoutes[locale][key as PageKey]} aria-current={key === page ? "page" : undefined}>{label}</a></li>
+            ))}
+          </ul>
+        </nav>
+        <a class="language-switch" href={routeFor(alternateLocale, page)} lang={alternateLocale} hreflang={alternateLocale}>{msg.language}</a>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>© {new Date().getFullYear()} {t(profile.identity.name, locale)}</p>
+        <p>{msg.footer}: <time datetime={profile.last_reviewed}>{profile.last_reviewed}</time></p>
+      </div>
+    </footer>
+  </body>
+</html>

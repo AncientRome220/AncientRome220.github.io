@@ -1,0 +1,470 @@
+schema_version: 3
+last_reviewed: '2026-08-20'
+identity:
+  name:
+    ja: 藤本 俊哉
+    kana: フジモト シュンヤ
+    en: Shunya Fujimoto
+  public_identifiers:
+    researchmap_url: https://researchmap.jp/shunyafujimoto
+    j_global_id: '202501000216166968'
+    j_global_url: https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202501000216166968
+    orcid: 0009-0005-5602-6052
+    orcid_url: https://orcid.org/0009-0005-5602-6052
+    github_url: https://github.com/AncientRome220
+profile:
+  ja:
+    summary: デジタル・ヒューマニティーズの手法を用いながら、ローマ帝政期エジプトの経済を研究しています。
+    expertise:
+    - 古代ローマ史
+    - 古代エジプト史
+    - 経済史
+    - デジタル・ヒューマニティーズ
+    current_projects:
+    - 穀物価格に基づくローマ帝政期エジプトの経済の評価：古代の物価データから、当時の経済構造や変動を評価・解明する。
+    - パピルスからの機械的なデータ抽出：パピルスから効率的に情報を抽出し、計量的な歴史分析を行うための基盤を構築する。
+  en:
+    summary: I study the economic history of Roman Egypt by employing computational methods from the Digital Humanities.
+    expertise:
+    - Ancient Roman History
+    - Ancient Egyptian History
+    - Economic History
+    - Digital Humanities
+    current_projects:
+    - Evaluating the economy of Roman Egypt based on grain prices by analyzing ancient commodity data to understand economic
+      structures and fluctuations.
+    - Developing computational approaches for semi-automatic data extraction from papyri and quantitative analysis of ancient
+      documents.
+current_affiliation:
+  organization:
+    ja: 京都大学
+    en: Kyoto University
+  section:
+    ja: 大学院文学研究科 歴史文化学専攻
+    en: Graduate School of Letters, Department of History
+  position:
+    ja: 博士後期課程
+    en: Ph.D. Student
+degrees:
+- date: 2025-03
+  degree:
+    ja: 文学修士
+    en: Master of Arts
+  institution:
+    ja: 京都大学
+    en: Kyoto University
+- date: 2023-03
+  degree:
+    ja: 文学学士
+    en: Bachelor of Arts
+  institution:
+    ja: 京都大学
+    en: Kyoto University
+research_interests:
+- ja: ローマ帝政期エジプト
+  en: Roman Egypt
+- ja: 経済史
+  en: Economic History
+- ja: パピルス
+  en: Papyrus
+- ja: デジタル・ヒューマニティズ
+  en: Digital Humanities
+- ja: 古代ローマ
+  en: Ancient Roman
+- ja: 任意団体
+  en: Voluntary Associations
+- ja: TEI/XML
+  en: TEI/XML
+- ja: LLM
+  en: LLM
+- ja: null
+  en: Python
+- ja: null
+  en: BERT
+research_areas:
+- discipline:
+    ja: 人文・社会
+    en: Humanities & social sciences
+  field:
+    ja: ヨーロッパ史、アメリカ史
+    en: History - Europe/America
+  keyword:
+    ja: 古代ローマ史
+    en: Ancient Roman History
+- discipline:
+    ja: 人文・社会
+    en: Humanities & social sciences
+  field:
+    ja: 図書館情報学、人文社会情報学
+    en: Library/information science, humanistic/social informatics
+  keyword:
+    ja: デジタル・ヒューマニティーズ
+    en: Digital Humanities
+- discipline:
+    ja: 人文・社会
+    en: Humanities & social sciences
+  field:
+    ja: アジア史、アフリカ史
+    en: History - Asia/Africa
+  keyword:
+    ja: エジプト学
+    en: Egyptology
+education:
+- from: 2025-04
+  to: null
+  institution:
+    ja: 京都大学大学院文学研究科 歴史文化学専攻 博士後期課程
+    en: Doctoral Course, Department of History, Kyoto University Graduate School of Letters
+- from: 2023-04
+  to: 2025-03
+  institution:
+    ja: 京都大学大学院文学研究科 歴史文化学専攻 修士課程
+    en: Master's Course, Department of History, Kyoto University Graduate School of Letters
+- from: 2019-04
+  to: 2023-03
+  institution:
+    ja: 京都大学文学部 人文学科
+    en: Faculty of Letters, Kyoto University
+research_experience:
+- from: 2026-04
+  to: null
+  affiliation:
+    ja: 京都大学人文科学研究所
+    en: Institute for Research in Humanities, Kyoto University
+  role:
+    ja: オフィスアシスタント
+    en: Office Assistant
+- from: 2025-04
+  to: null
+  affiliation:
+    ja: DMG森精機博士後期課程支援奨学生
+    en: DMG Mori Scholarship Student for Doctoral Programs
+  role:
+    ja: null
+    en: null
+- from: 2024-04
+  to: 2026-03
+  affiliation:
+    ja: 京都大学人文科学研究所
+    en: Institute for Research in Humanities, Kyoto University
+  role:
+    ja: リサーチフェロー
+    en: Research Fellow
+- from: 2025-07
+  to: 2026-01
+  affiliation:
+    ja: 京都大学大学院文学研究科
+    en: Kyoto University Graduate School of Letters
+  role:
+    ja: リサーチアシスタント
+    en: Research Assistant
+committee_memberships:
+- from: 2026-04
+  to: null
+  organization:
+    ja: 西洋史読書会
+    en: Kyoto University Society for Western History
+  role:
+    ja: 事務局代表
+    en: Secretary General
+- from: 2025-04
+  to: 2026-03
+  organization:
+    ja: 西洋史読書会
+    en: Kyoto University Society for Western History
+  role:
+    ja: 会計
+    en: Treasurer
+- from: 2023-04
+  to: 2024-03
+  organization:
+    ja: 史学研究会
+    en: The Society of Historical Research
+  role:
+    ja: 庶務委員
+    en: General Affairs Officer
+publications:
+- bibliography_key: fujimotoAbeOgawa2026economicExtraction
+  category: published_paper
+  date: 2026-05
+  authors:
+    ja:
+    - 藤本俊哉
+    - 阿部忠道
+    - 小川潤
+    en:
+    - Shunya Fujimoto
+    - Tadamichi Abe
+    - Jun Ogawa
+  title:
+    ja: ルールベース手法とLLMによる古文書からの経済情報抽出の比較――ローマ帝政期エジプトの穀物価格を事例に――
+    en: 'Comparing Rule-Based and LLM Methods for Extracting Economic Information from Ancient Documents: Grain Prices in
+      Roman Imperial Egypt'
+  venue:
+    ja: 情報処理学会研究報告 人文科学とコンピュータ
+    en: IPSJ SIG Computers and the Humanities
+  series: null
+  volume: 2026-CH-141
+  issue: '19'
+  pages: 1–8
+  language: ja
+  peer_reviewed: false
+  lead_author: true
+  corresponding_author: true
+  doi: null
+  url: null
+- bibliography_key: fujimoto2025masterThesis
+  category: master_thesis
+  date: 2025-03
+  authors:
+    ja:
+    - 藤本俊哉
+    en:
+    - Shunya Fujimoto
+  title:
+    ja: 地域共同体の運営への任意団体の貢献―ローマ帝政期エジプトを事例に―
+    en: Contributions of Voluntary Associations to the Governance of Local Communities in Roman Egypt
+  venue:
+    ja: 京都大学大学院文学研究科 修士論文
+    en: Master's thesis, Graduate School of Letters, Kyoto University
+  series: null
+  volume: null
+  issue: null
+  pages: null
+  language: ja
+  peer_reviewed: false
+  lead_author: true
+  corresponding_author: false
+  doi: null
+  url: null
+- bibliography_key: fujimoto2026chaniotisReview
+  category: book_review
+  date: 2026-05
+  authors:
+    ja:
+    - 藤本俊哉
+    en:
+    - Shunya Fujimoto
+  title:
+    ja: ＜書評＞アンゲロス・ハニオティス（藤井崇訳）『アレクサンドロス以後―長いヘレニズムとギリシア世界―』
+    en: null
+  venue:
+    ja: 史林
+    en: Shirin
+  series: null
+  volume: '109'
+  issue: '3'
+  pages: 96–104
+  language: ja
+  peer_reviewed: true
+  lead_author: true
+  corresponding_author: false
+  doi: null
+  url: null
+- bibliography_key: fujimoto2025reggianiReview
+  category: book_review
+  date: '2025-12-25'
+  authors:
+    ja:
+    - 藤本俊哉
+    en:
+    - Shunya Fujimoto
+  title:
+    ja: '[書評] Nicola Reggiani (ed.), Digital Papyrology III: The Digital Critical Edition of Greek Papyri: Issues, Projects,
+      and Perspectives'
+    en: '[Reviews] Nicola Reggiani (ed.), Digital Papyrology III: The Digital Critical Edition of Greek Papyri: Issues, Projects,
+      and Perspectives'
+  venue:
+    ja: 西洋古代史研究
+    en: 'Acta Academiae Antiquitatis Kiotoensis: The Kyoto Journal of Ancient History'
+  series: null
+  volume: '25'
+  issue: null
+  pages: 17–24
+  language: ja
+  peer_reviewed: false
+  lead_author: true
+  corresponding_author: false
+  doi: 10.17983/300514
+  url: https://doi.org/10.17983/300514
+- bibliography_key: fujimoto2023gabrielsenReview
+  category: book_review
+  date: 2023-12
+  authors:
+    ja:
+    - 藤本俊哉
+    en:
+    - Shunya Fujimoto
+  title:
+    ja: '<書評> Vincent Gabrielsen and Mario C. D. Paganini (eds.), Private Associations in the Ancient Greek World: Regulations
+      and the Creation of Group Identity'
+    en: '<Reviews> Vincent Gabrielsen and Mario C. D. Paganini (eds.), Private Associations in the Ancient Greek World: Regulations
+      and the Creation of Group Identity'
+  venue:
+    ja: 西洋古代史研究
+    en: Acta Academiae Antiquitatis Kiotoensis (The Kyoto Journal of Ancient History)
+  series: null
+  volume: '23'
+  issue: null
+  pages: 47–53
+  language: ja
+  peer_reviewed: false
+  lead_author: true
+  corresponding_author: false
+  doi: null
+  url: https://repository.kulib.kyoto-u.ac.jp/verify/9a9d4fd2-1c52-46e4-8ec2-476e6ac626bc
+presentations:
+- date: '2026-05-16'
+  type: poster_presentation
+  title:
+    ja: ルールベース手法とLLMによる古文書からの経済情報抽出の比較――ローマ帝政期エジプトを事例に――
+    en: 'A Comparison of Rule-Based and LLM-Based Extraction of Economic Information from Ancient Documents: A Case Study
+      of Grain Prices in Roman Egypt'
+  event:
+    ja: 第141回人文科学とコンピュータ研究発表会
+    en: The 141st Research Meeting of IPSJ SIG Computers and the Humanities
+  co_presenters:
+    ja:
+    - 阿部忠道
+    - 小川潤
+    en:
+    - Tadamichi Abe
+    - Jun Ogawa
+- date: '2026-02-28'
+  type: poster_presentation
+  title:
+    ja: ローマ帝政期エジプトパピルスからの半自動的データ抽出と定量的分析：穀物価格の変動を事例に
+    en: 'Semi-automated Data Extraction and Quantitative Analysis on Papyri of Roman Egypt: The Case of Grain Price Fluctuations'
+  event:
+    ja: 第4回DH若手の会
+    en: 4th DH Young Scholars' Meeting
+  co_presenters:
+    ja:
+    - 阿部忠道
+    - 小川潤
+    en:
+    - Tadamichi Abe
+    - Jun Ogawa
+  location:
+    ja: 国立民族学博物館
+    en: National Museum of Ethnology
+- date: '2025-11-08'
+  event_period: 2025-11-07/2025-11-09
+  type: oral_presentation
+  title:
+    ja: null
+    en: 'Unofficial Office: Voluntary Associations and Village Governance in Roman Egypt'
+  event:
+    ja: null
+    en: The Triad Workshop for Graduate Students of Classical Studies
+- date: '2025-11-03'
+  type: oral_presentation
+  title:
+    ja: ローマ帝政期エジプトの村落行政における任意団体――後1～2世紀のファイユーム地方を中心に――
+    en: 'Voluntary Associations in Village Administration in Roman Egypt: Focusing on the Fayum in the First and Second Centuries
+      CE'
+  event:
+    ja: 第93回読書会大会
+    en: The 93rd Dokusho-kai Conference
+- date: '2025-06-07'
+  event_period: 2025-06-07/2025-06-08
+  type: poster_presentation
+  title:
+    ja: 地域共同体の運営への任意団体の貢献―ローマ帝政期エジプトを事例に―
+    en: The Contribution of Voluntary Associations to the Government of Villages in Roman Egypt
+  event:
+    ja: 日本西洋古典学会第75回大会
+    en: The Classical Society of Japan, 75th Annual Conference
+- date: '2024-06-29'
+  type: oral_presentation
+  title:
+    ja: ローマ帝政期エジプトにおける任意団体による統制
+    en: The Control of Private Associations in Roman Egypt
+  event:
+    ja: アコリス考古学プロジェクト公開シンポジウム
+    en: Public Symposium of the Akoris Archaeology Project
+- date: '2022-10-14'
+  type: oral_presentation
+  title:
+    ja: null
+    en: Evergetism in Ancient Sicily
+  event:
+    ja: null
+    en: Kyoto University Ancient History Seminar
+association_memberships:
+- from: 2026-04
+  to: null
+  name:
+    ja: 西洋古代コンテンツ研究会
+    en: The Society for Classical Content
+- from: 2026-01
+  to: null
+  name:
+    ja: デジタルアーカイブ学会
+    en: Japan Society for Digital Archive
+- from: 2025-11
+  to: null
+  name:
+    ja: 人文科学とコンピュータ研究会
+    en: IPSJ SIG Computers and the Humanities
+- from: 2025-11
+  to: null
+  name:
+    ja: 情報処理学会
+    en: Information Processing Society of Japan
+- from: 2025-04
+  to: null
+  name:
+    ja: 史学研究会
+    en: The Society of Historical Research
+- from: 2025-04
+  to: null
+  name:
+    ja: null
+    en: Japanese Association for Digital Humanities
+- from: 2025-04
+  to: null
+  name:
+    ja: 西洋古典学会
+    en: The Classical Society of Japan
+social_contributions:
+- date: '2026-08-07'
+  role: lecturer
+  title:
+    ja: 文系×理系で挑む新しい歴史学：「デジタル・ヒューマニティーズ」の世界
+    en: 'A New Approach to History Bridging the Humanities and Sciences: Exploring the World of Digital Humanities'
+  event:
+    ja: 京都大学オープンキャンパス2026・学びコ・ラボ！高校生のための京大院生ライブ講義
+    en: Kyoto University Open Campus 2026 — Manabi Co-Lab! Kyoto University Graduate Student Lecture Series
+  location:
+    ja: 京都大学学務部棟1階・KUINEP講義室
+    en: KUINEP Lecture Room, Academic Affairs Department, Kyoto University
+- date: '2025-09-17'
+  role: lecturer
+  title:
+    ja: パピルスを読んでみよう！古代の人々の日常生活
+    en: Read Papyri! The Daily Life of Ancient People
+  event:
+    ja: 京都大学 学びコーディネーター
+    en: Kyoto University Learning Coordinator
+  location:
+    ja: 福井県立藤島高校
+    en: Fujishima High School, Fukui
+- from: '2025-08-07'
+  to: '2025-08-08'
+  role: lecturer
+  title:
+    ja: 歴史学とデジタル技術
+    en: Historiography and Digital Technology
+  event:
+    ja: 京都大学 学びコ・ラボ！高校生のための京大院生ライブ講義
+    en: Kyoto University Manabi Co-Lab! Graduate Student Lecture Series for High School Students
+  location:
+    ja: 京都大学百周年記念館 国際交流ホールI
+    en: International Conference Hall I, Clock Tower Centennial Hall, Kyoto University
+other_activities:
+- from: 2026-07
+  to: 2026-07
+  title:
+    ja: null
+    en: The Leiden Summer School in Languages and Linguistics

@@ -1,0 +1,26 @@
+{
+  "name": "ancientrome220.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test:site": "node scripts/check-built-site.mjs",
+    "verify": "astro check && astro build && node scripts/check-built-site.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.0.0",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "typescript": "^5.9.3"
+  }
+}
