@@ -1,5 +1,6 @@
 import { readFile, stat } from "node:fs/promises";
 import { resolve } from "node:path";
+import { parse } from "yaml";
 
 const root = resolve(import.meta.dirname, "..");
 const dist = resolve(root, "dist");
@@ -7,7 +8,11 @@ const pages = [
   "index.html", "research/index.html", "publications/index.html", "activities/index.html", "cv/index.html",
   "en/index.html", "en/research/index.html", "en/publications/index.html", "en/activities/index.html", "en/cv/index.html", "404.html"
 ];
-const privatePatterns = [/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i, /rm_researchers/i, /\.jsonl/i, /contact_point/i, /internal_id/i, /exports[\\/]/i];
+const privatePatterns = [/rm_researchers/i, /\.jsonl/i, /contact_point/i, /internal_id/i, /exports[\\/]/i];
+const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
+const profile = parse(await readFile(resolve(root, "src/data/profile.yaml"), "utf8"));
+const publicEmail = profile?.public_contact?.email;
+const emailPages = new Set(["index.html", "en/index.html"]);
 
 /** @param {string} path */
 async function exists(path) {
@@ -36,6 +41,17 @@ for (const required of ["robots.txt", "sitemap-index.xml", "downloads/publicatio
 }
 for (const [page, html] of htmlFiles) {
   for (const pattern of privatePatterns) if (pattern.test(html)) failures.push(`private pattern ${pattern} in ${page}`);
+  const emails = html.match(emailPattern) ?? [];
+  if (emailPages.has(page)) {
+    if (typeof publicEmail !== "string" || emails.length !== 2 || emails.some((email) => email !== publicEmail)) {
+      failures.push(`expected only the approved public email link in ${page}`);
+    }
+    if (!html.includes(`href="mailto:${publicEmail}"`) || !html.includes(`>${publicEmail}<`)) {
+      failures.push(`missing visible mailto link in ${page}`);
+    }
+  } else if (emails.length > 0) {
+    failures.push(`email address found outside a homepage in ${page}`);
+  }
   if (!/<html lang="(?:ja|en)">/.test(html)) failures.push(`missing lang in ${page}`);
   if (!/<link rel="canonical"/.test(html)) failures.push(`missing canonical in ${page}`);
   if (!/<link rel="alternate" hreflang="ja"/.test(html)) failures.push(`missing ja hreflang in ${page}`);

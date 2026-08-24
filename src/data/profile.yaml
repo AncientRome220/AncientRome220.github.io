@@ -1,5 +1,5 @@
 schema_version: 3
-last_reviewed: '2026-08-20'
+last_reviewed: '2026-08-24'
 identity:
   name:
     ja: 藤本 俊哉
@@ -12,6 +12,8 @@ identity:
     orcid: 0009-0005-5602-6052
     orcid_url: https://orcid.org/0009-0005-5602-6052
     github_url: https://github.com/AncientRome220
+public_contact:
+  email: fujimoto.syunnya.75r@st.kyoto-u.ac.jp
 profile:
   ja:
     summary: デジタル・ヒューマニティーズの手法を用いながら、ローマ帝政期エジプトの経済を研究しています。

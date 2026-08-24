@@ -15,6 +15,7 @@ const affiliation = [
 const publications = [...profile.publications].sort((a, b) => b.date.localeCompare(a.date));
 const presentations = [...profile.presentations].sort((a, b) => b.date.localeCompare(a.date));
 const outreach = [...profile.social_contributions].sort((a, b) => (b.date || b.from).localeCompare(a.date || a.from));
+const contactEmail = profile.public_contact.email;
 const externalProfiles = [
   ["ORCID", profile.identity.public_identifiers.orcid_url],
   ["researchmap", profile.identity.public_identifiers.researchmap_url],
@@ -54,6 +55,7 @@ const pageTitle = msg.titles[page];
       <section class="section-grid ruled-section" aria-labelledby="profiles-title">
         <div><p class="section-number">03</p><h2 id="profiles-title">{msg.external}</h2></div>
         <ul class="external-list">
+          <li><a href={`mailto:${contactEmail}`}>{contactEmail}<span aria-hidden="true"> ✉</span></a></li>
           {externalProfiles.map(([label, url]) => <li><a href={url} rel="me noreferrer">{label}<span aria-hidden="true"> ↗</span></a></li>)}
         </ul>
       </section>

@@ -22,7 +22,7 @@ python site/sync_public.py --target C:\research\AncientRome220.github.io --check
 python site/sync_public.py --target C:\research\AncientRome220.github.io --write
 ```
 
-The synchronizer copies only explicitly allowed profile fields, public attachment URLs, and public BibTeX. It never copies raw researchmap exports or attachment bodies.
+The synchronizer copies only explicitly allowed profile fields, the approved public contact email, public attachment URLs, and public BibTeX. It never copies raw researchmap exports, other contact details, or attachment bodies.
 
 ## Deployment
 
