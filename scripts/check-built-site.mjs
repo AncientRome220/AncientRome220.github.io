@@ -12,7 +12,7 @@ const privatePatterns = [/rm_researchers/i, /\.jsonl/i, /contact_point/i, /inter
 const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
 const profile = parse(await readFile(resolve(root, "src/data/profile.yaml"), "utf8"));
 const publicEmail = profile?.public_contact?.email;
-const emailPages = new Set(["index.html", "en/index.html"]);
+const emailPages = new Set(["index.html", "en/index.html", "cv/index.html", "en/cv/index.html"]);
 
 /** @param {string} path */
 async function exists(path) {
@@ -69,5 +69,18 @@ for (const pattern of privatePatterns) if (pattern.test(builtText)) failures.pus
 const jaCount = (htmlFiles.find(([page]) => page === "publications/index.html")?.[1].match(/<article>/g) ?? []).length;
 const enCount = (htmlFiles.find(([page]) => page === "en/publications/index.html")?.[1].match(/<article>/g) ?? []).length;
 if (jaCount !== enCount || jaCount !== 5) failures.push(`publication count mismatch: ja=${jaCount}, en=${enCount}`);
+const cvPages = htmlFiles.filter(([page]) => page === "cv/index.html" || page === "en/cv/index.html");
+for (const [page, html] of cvPages) {
+  const publicationCount = (html.match(/data-cv-record="publication"/g) ?? []).length;
+  const presentationCount = (html.match(/data-cv-record="presentation"/g) ?? []).length;
+  if (publicationCount !== profile.publications.length) failures.push(`CV publication count mismatch in ${page}: ${publicationCount}`);
+  if (presentationCount !== profile.presentations.length) failures.push(`CV presentation count mismatch in ${page}: ${presentationCount}`);
+  for (const required of ["profile", "education", "appointments", "awards", "publications", "presentations", "service", "engagement", "memberships", "other"]) {
+    if (!html.includes(`data-cv-section="${required}"`)) failures.push(`missing CV section ${required} in ${page}`);
+  }
+  for (const empty of ["teaching", "languages", "skills"]) {
+    if (html.includes(`data-cv-section="${empty}"`)) failures.push(`empty CV section rendered: ${empty} in ${page}`);
+  }
+}
 if (failures.length) { console.error(failures.join("\n")); process.exit(1); }
 console.log(`Verified ${pages.length} HTML files, bilingual parity, internal links, metadata, and privacy guards.`);

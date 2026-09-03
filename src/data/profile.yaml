@@ -1,4 +1,4 @@
-schema_version: 3
+schema_version: 4
 last_reviewed: '2026-08-24'
 identity:
   name:
@@ -136,14 +136,6 @@ research_experience:
   role:
     ja: オフィスアシスタント
     en: Office Assistant
-- from: 2025-04
-  to: null
-  affiliation:
-    ja: DMG森精機博士後期課程支援奨学生
-    en: DMG Mori Scholarship Student for Doctoral Programs
-  role:
-    ja: null
-    en: null
 - from: 2024-04
   to: 2026-03
   affiliation:
@@ -160,6 +152,21 @@ research_experience:
   role:
     ja: リサーチアシスタント
     en: Research Assistant
+awards_funding:
+- from: 2025-04
+  to: null
+  title:
+    ja: DMG森精機博士後期課程支援奨学生
+    en: DMG Mori Scholarship Student for Doctoral Programs
+  organization:
+    ja: null
+    en: null
+  description:
+    ja: null
+    en: null
+teaching: []
+languages: []
+technical_skills: []
 committee_memberships:
 - from: 2026-04
   to: null

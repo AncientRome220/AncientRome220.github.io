@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import CvPage from "./CvPage.astro";
 import { messages, pageRoutes, type Locale, type PageKey } from "../lib/i18n";
 import { linksFor, list, period, profile, publicationDetails, t } from "../lib/data";
 
@@ -14,7 +15,7 @@ const affiliation = [
 ].filter(Boolean).join(" · ");
 const publications = [...profile.publications].sort((a, b) => b.date.localeCompare(a.date));
 const presentations = [...profile.presentations].sort((a, b) => b.date.localeCompare(a.date));
-const outreach = [...profile.social_contributions].sort((a, b) => (b.date || b.from).localeCompare(a.date || a.from));
+const outreach = [...profile.social_contributions].sort((a, b) => (b.date || b.from || "").localeCompare(a.date || a.from || ""));
 const contactEmail = profile.public_contact.email;
 const externalProfiles = [
   ["ORCID", profile.identity.public_identifiers.orcid_url],
@@ -133,15 +134,6 @@ const pageTitle = msg.titles[page];
   )}
 
   {page === "cv" && (
-    <>
-      <header class="page-heading cv-heading ruled-section"><p class="eyebrow">Curriculum Vitae</p><h1>{name}</h1><p>{affiliation}</p><button class="print-button button button-small" onclick="window.print()">{msg.print}</button></header>
-      <section class="cv-section ruled-section"><h2>{msg.degrees}</h2><ol class="cv-list">{profile.degrees.map((item: any) => <li><time datetime={item.date}>{item.date}</time><span>{t(item.degree, locale)}, {t(item.institution, locale)}</span></li>)}</ol></section>
-      <section class="cv-section ruled-section"><h2>{msg.education}</h2><ol class="cv-list">{profile.education.map((item: any) => <li><span>{period(item, locale)}</span><span>{t(item.institution, locale)}</span></li>)}</ol></section>
-      <section class="cv-section ruled-section"><h2>{msg.experience}</h2><ol class="cv-list">{profile.research_experience.map((item: any) => <li><span>{period(item, locale)}</span><span>{t(item.affiliation, locale)}{t(item.role, locale) && ` — ${t(item.role, locale)}`}</span></li>)}</ol></section>
-      <section class="cv-section ruled-section"><h2>{msg.committees}</h2><ol class="cv-list">{profile.committee_memberships.map((item: any) => <li><span>{period(item, locale)}</span><span>{t(item.organization, locale)} — {t(item.role, locale)}</span></li>)}</ol></section>
-      <section class="cv-section ruled-section"><h2>{msg.memberships}</h2><ol class="cv-list">{profile.association_memberships.map((item: any) => <li><span>{period(item, locale)}</span><span>{t(item.name, locale)}</span></li>)}</ol></section>
-      <section class="cv-section ruled-section"><h2>{msg.publications}</h2><ol class="compact-publications">{publications.map((item: any) => <li><span>{item.date}</span><span>“{t(item.title, locale)},” {publicationDetails(item, locale)}</span></li>)}</ol></section>
-      {profile.other_activities.length > 0 && <section class="cv-section ruled-section"><h2>{msg.other}</h2><ol class="cv-list">{profile.other_activities.map((item: any) => <li><span>{period(item, locale)}</span><span>{t(item.title, locale)}</span></li>)}</ol></section>}
-    </>
+    <CvPage {locale} />
   )}
 </BaseLayout>

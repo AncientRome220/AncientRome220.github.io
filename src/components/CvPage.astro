@@ -1,0 +1,254 @@
+---
+import type { Locale } from "../lib/i18n";
+import {
+  formatDate,
+  linksFor,
+  list,
+  period,
+  presentationTypeLabel,
+  profile,
+  publicationDetails,
+  publicationTypeLabel,
+  t,
+  type Publication
+} from "../lib/data";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+
+const copy = {
+  ja: {
+    eyebrow: "Academic Curriculum Vitae",
+    researchProfile: "研究概要",
+    currentProjects: "現在の研究課題",
+    researchAreas: "研究分野・キーワード",
+    education: "学歴・学位",
+    appointments: "研究歴",
+    awards: "受賞・研究支援",
+    publications: "研究業績",
+    presentations: "学会発表",
+    service: "学術活動・委員歴",
+    engagement: "社会貢献",
+    memberships: "所属学会",
+    other: "研修・その他の活動",
+    teaching: "教育歴",
+    languages: "言語",
+    skills: "技術・研究手法",
+    contents: "CV内の目次",
+    email: "Email",
+    website: "Website",
+    print: "印刷・PDF保存",
+    peerReviewed: "査読あり",
+    corresponding: "責任著者",
+    coPresenters: "共同発表者",
+    materials: "関連資料",
+    presentRole: "在籍課程",
+    lecturer: "講師"
+  },
+  en: {
+    eyebrow: "Academic Curriculum Vitae",
+    researchProfile: "Research Profile",
+    currentProjects: "Current Research",
+    researchAreas: "Fields & Keywords",
+    education: "Education & Degrees",
+    appointments: "Research Appointments",
+    awards: "Awards & Funding",
+    publications: "Publications",
+    presentations: "Conference Presentations",
+    service: "Academic Service",
+    engagement: "Public Engagement",
+    memberships: "Academic Memberships",
+    other: "Training & Additional Activities",
+    teaching: "Teaching",
+    languages: "Languages",
+    skills: "Technical Skills & Methods",
+    contents: "CV contents",
+    email: "Email",
+    website: "Website",
+    print: "Print or save as PDF",
+    peerReviewed: "Peer reviewed",
+    corresponding: "Corresponding author",
+    coPresenters: "Co-presenters",
+    materials: "Materials",
+    presentRole: "Current programme",
+    lecturer: "Lecturer"
+  }
+}[locale];
+
+const name = t(profile.identity.name, locale);
+const identifiers = profile.identity.public_identifiers;
+const websiteUrl = "https://ancientrome220.github.io/";
+const publications = [...profile.publications].sort((a, b) => b.date.localeCompare(a.date));
+const presentations = [...profile.presentations].sort((a, b) => b.date.localeCompare(a.date));
+const outreach = [...profile.social_contributions].sort((a, b) => (b.date || b.from || "").localeCompare(a.date || a.from || ""));
+const publicationCategoryOrder = ["published_paper", "master_thesis", "book_review"];
+const publicationCategories = [...new Set(publications.map((item) => item.category))].sort((a, b) => {
+  const aIndex = publicationCategoryOrder.indexOf(a);
+  const bIndex = publicationCategoryOrder.indexOf(b);
+  return (aIndex === -1 ? 99 : aIndex) - (bIndex === -1 ? 99 : bIndex);
+});
+const pairedDegreeDates = new Set(profile.education.map((item) => item.to).filter(Boolean));
+const unpairedDegrees = profile.degrees.filter((degree) => !pairedDegreeDates.has(degree.date));
+const researchKeywords = [...new Set([
+  ...profile.research_areas.map((area) => t(area.keyword, locale)),
+  ...profile.research_interests.map((interest) => t(interest, locale))
+].filter(Boolean))];
+
+const sections = [
+  { id: "profile", label: copy.researchProfile, show: true },
+  { id: "education", label: copy.education, show: profile.education.length > 0 || profile.degrees.length > 0 },
+  { id: "appointments", label: copy.appointments, show: profile.research_experience.length > 0 },
+  { id: "awards", label: copy.awards, show: profile.awards_funding.length > 0 },
+  { id: "publications", label: copy.publications, show: publications.length > 0 },
+  { id: "presentations", label: copy.presentations, show: presentations.length > 0 },
+  { id: "service", label: copy.service, show: profile.committee_memberships.length > 0 },
+  { id: "engagement", label: copy.engagement, show: outreach.length > 0 },
+  { id: "memberships", label: copy.memberships, show: profile.association_memberships.length > 0 },
+  { id: "other", label: copy.other, show: profile.other_activities.length > 0 },
+  { id: "teaching", label: copy.teaching, show: profile.teaching.length > 0 },
+  { id: "languages", label: copy.languages, show: profile.languages.length > 0 },
+  { id: "skills", label: copy.skills, show: profile.technical_skills.length > 0 }
+].filter((section) => section.show);
+
+const numberFor = (id: string) => String(sections.findIndex((section) => section.id === id) + 1).padStart(2, "0");
+const roleLabel = (role: string | null | undefined) => role === "lecturer" ? copy.lecturer : role?.replaceAll("_", " ") ?? "";
+const authorLine = (item: Publication) => list(item.authors, locale).join(locale === "ja" ? "、" : ", ");
+---
+
+<header class="cv-masthead ruled-section">
+  <div class="cv-masthead-grid">
+    <div>
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{name}</h1>
+      <p class="cv-position">{t(profile.current_affiliation.position, locale)}</p>
+      <p class="cv-affiliation">{t(profile.current_affiliation.section, locale)}<br />{t(profile.current_affiliation.organization, locale)}</p>
+    </div>
+    <address class="cv-contact">
+      <p><span>{copy.email}</span><a href={`mailto:${profile.public_contact.email}`}>{profile.public_contact.email}</a></p>
+      <p><span>{copy.website}</span><a href={websiteUrl}>ancientrome220.github.io</a></p>
+      <p><span>ORCID</span><a href={identifiers.orcid_url}>{identifiers.orcid}</a></p>
+      <p><span>researchmap</span><a href={identifiers.researchmap_url}>shunyafujimoto</a></p>
+    </address>
+  </div>
+  <div class="cv-toolbar">
+    <button class="print-button button button-small" onclick="window.print()">{copy.print}</button>
+  </div>
+</header>
+
+<nav class="cv-toc" aria-label={copy.contents}>
+  <ol>
+    {sections.map((section, index) => <li><a href={`#${section.id}`}><span>{String(index + 1).padStart(2, "0")}</span>{section.label}</a></li>)}
+  </ol>
+</nav>
+
+<section id="profile" class="cv-section" aria-labelledby="profile-title" data-cv-section="profile">
+  <div class="cv-section-heading"><p>{numberFor("profile")}</p><h2 id="profile-title">{copy.researchProfile}</h2></div>
+  <div class="cv-section-body cv-profile">
+    <p class="cv-summary">{profile.profile[locale].summary}</p>
+    <div class="cv-profile-grid">
+      <div>
+        <h3>{copy.currentProjects}</h3>
+        <ol class="cv-projects">{profile.profile[locale].current_projects.map((project) => <li>{project}</li>)}</ol>
+      </div>
+      <div>
+        <h3>{copy.researchAreas}</h3>
+        <ul class="cv-keywords">
+          {researchKeywords.map((keyword) => <li>{keyword}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{(profile.education.length > 0 || profile.degrees.length > 0) && <section id="education" class="cv-section" aria-labelledby="education-title" data-cv-section="education">
+  <div class="cv-section-heading"><p>{numberFor("education")}</p><h2 id="education-title">{copy.education}</h2></div>
+  <div class="cv-section-body"><ol class="cv-entry-list">
+    {profile.education.map((item) => {
+      const degree = profile.degrees.find((candidate) => candidate.date === item.to);
+      return <li class="cv-entry">
+        <time datetime={item.from ?? undefined}>{period(item, locale)}</time>
+        <div><p class="cv-entry-kicker">{degree ? t(degree.degree, locale) : copy.presentRole}</p><h3>{t(item.institution, locale)}</h3></div>
+      </li>;
+    })}
+    {unpairedDegrees.map((degree) => <li class="cv-entry"><time datetime={degree.date}>{formatDate(degree.date, locale)}</time><div><p class="cv-entry-kicker">{t(degree.degree, locale)}</p><h3>{t(degree.institution, locale)}</h3></div></li>)}
+  </ol></div>
+</section>}
+
+{profile.research_experience.length > 0 && <section id="appointments" class="cv-section" aria-labelledby="appointments-title" data-cv-section="appointments">
+  <div class="cv-section-heading"><p>{numberFor("appointments")}</p><h2 id="appointments-title">{copy.appointments}</h2></div>
+  <div class="cv-section-body"><ol class="cv-entry-list">{profile.research_experience.map((item) => <li class="cv-entry"><time datetime={item.from ?? undefined}>{period(item, locale)}</time><div><p class="cv-entry-kicker">{t(item.role, locale)}</p><h3>{t(item.affiliation, locale)}</h3></div></li>)}</ol></div>
+</section>}
+
+{profile.awards_funding.length > 0 && <section id="awards" class="cv-section" aria-labelledby="awards-title" data-cv-section="awards">
+  <div class="cv-section-heading"><p>{numberFor("awards")}</p><h2 id="awards-title">{copy.awards}</h2></div>
+  <div class="cv-section-body"><ol class="cv-entry-list">{profile.awards_funding.map((item) => <li class="cv-entry"><time datetime={item.from ?? undefined}>{period(item, locale)}</time><div><h3>{t(item.title, locale)}</h3>{t(item.organization, locale) && <p>{t(item.organization, locale)}</p>}{t(item.description, locale) && <p>{t(item.description, locale)}</p>}</div></li>)}</ol></div>
+</section>}
+
+{publications.length > 0 && <section id="publications" class="cv-section" aria-labelledby="publications-title" data-cv-section="publications">
+  <div class="cv-section-heading"><p>{numberFor("publications")}</p><h2 id="publications-title">{copy.publications}</h2></div>
+  <div class="cv-section-body">
+    {publicationCategories.map((category) => <div class="cv-subsection">
+      <h3 class="cv-subsection-title">{publicationTypeLabel(category, locale)}</h3>
+      <ol class="cv-entry-list">{publications.filter((item) => item.category === category).map((item) => <li class="cv-entry cv-publication" data-cv-record="publication">
+        <time datetime={item.date}>{formatDate(item.date, locale)}</time>
+        <div>
+          <p class="cv-entry-flags">{item.peer_reviewed && <span>{copy.peerReviewed}</span>}{item.corresponding_author && <span>{copy.corresponding}</span>}</p>
+          <p class="cv-authors">{authorLine(item)}</p>
+          <h4>“{t(item.title, locale)}”</h4>
+          <p class="cv-entry-meta">{publicationDetails(item, locale)}</p>
+          {(item.doi || item.url) && <p class="cv-entry-links">{item.doi && <a href={`https://doi.org/${item.doi}`}>DOI: {item.doi}</a>}{item.url && (!item.doi || item.url !== `https://doi.org/${item.doi}`) && <a href={item.url}>{locale === "ja" ? "本文・リポジトリ" : "Full text / Repository"}</a>}</p>}
+        </div>
+      </li>)}</ol>
+    </div>)}
+  </div>
+</section>}
+
+{presentations.length > 0 && <section id="presentations" class="cv-section" aria-labelledby="presentations-title" data-cv-section="presentations">
+  <div class="cv-section-heading"><p>{numberFor("presentations")}</p><h2 id="presentations-title">{copy.presentations}</h2></div>
+  <div class="cv-section-body"><ol class="cv-entry-list">{presentations.map((item) => {
+    const related = linksFor(`Presentation, ${item.date}`);
+    const coPresenters = list(item.co_presenters, locale);
+    return <li class="cv-entry" data-cv-record="presentation"><time datetime={item.date}>{formatDate(item.date, locale)}</time><div>
+      <p class="cv-entry-kicker">{presentationTypeLabel(item.type, locale)}</p>
+      <h3>{t(item.title, locale)}</h3>
+      <p class="cv-entry-meta">{t(item.event, locale)}{t(item.location, locale) && ` · ${t(item.location, locale)}`}</p>
+      {coPresenters.length > 0 && <p class="cv-entry-detail">{copy.coPresenters}: {coPresenters.join(locale === "ja" ? "、" : ", ")}</p>}
+      {related.length > 0 && <p class="cv-entry-links">{related.map((file) => <a href={file.url}>{copy.materials}: {file.source_name}</a>)}</p>}
+    </div></li>;
+  })}</ol></div>
+</section>}
+
+{profile.committee_memberships.length > 0 && <section id="service" class="cv-section" aria-labelledby="service-title" data-cv-section="service">
+  <div class="cv-section-heading"><p>{numberFor("service")}</p><h2 id="service-title">{copy.service}</h2></div>
+  <div class="cv-section-body"><ol class="cv-entry-list">{profile.committee_memberships.map((item) => <li class="cv-entry"><time datetime={item.from ?? undefined}>{period(item, locale)}</time><div><p class="cv-entry-kicker">{t(item.role, locale)}</p><h3>{t(item.organization, locale)}</h3></div></li>)}</ol></div>
+</section>}
+
+{outreach.length > 0 && <section id="engagement" class="cv-section" aria-labelledby="engagement-title" data-cv-section="engagement">
+  <div class="cv-section-heading"><p>{numberFor("engagement")}</p><h2 id="engagement-title">{copy.engagement}</h2></div>
+  <div class="cv-section-body"><ol class="cv-entry-list">{outreach.map((item) => <li class="cv-entry"><time datetime={item.date || item.from || undefined}>{period(item, locale)}</time><div><p class="cv-entry-kicker">{roleLabel(item.role)}</p><h3>{t(item.title, locale)}</h3><p class="cv-entry-meta">{t(item.event, locale)}{t(item.location, locale) && ` · ${t(item.location, locale)}`}</p></div></li>)}</ol></div>
+</section>}
+
+{profile.association_memberships.length > 0 && <section id="memberships" class="cv-section" aria-labelledby="memberships-title" data-cv-section="memberships">
+  <div class="cv-section-heading"><p>{numberFor("memberships")}</p><h2 id="memberships-title">{copy.memberships}</h2></div>
+  <div class="cv-section-body"><ol class="cv-entry-list cv-compact-list">{profile.association_memberships.map((item) => <li class="cv-entry"><time datetime={item.from ?? undefined}>{period(item, locale)}</time><div><h3>{t(item.name, locale)}</h3></div></li>)}</ol></div>
+</section>}
+
+{profile.other_activities.length > 0 && <section id="other" class="cv-section" aria-labelledby="other-title" data-cv-section="other">
+  <div class="cv-section-heading"><p>{numberFor("other")}</p><h2 id="other-title">{copy.other}</h2></div>
+  <div class="cv-section-body"><ol class="cv-entry-list">{profile.other_activities.map((item) => <li class="cv-entry"><time datetime={item.from ?? undefined}>{period(item, locale)}</time><div><h3>{t(item.title, locale)}</h3></div></li>)}</ol></div>
+</section>}
+
+{profile.teaching.length > 0 && <section id="teaching" class="cv-section" aria-labelledby="teaching-title" data-cv-section="teaching">
+  <div class="cv-section-heading"><p>{numberFor("teaching")}</p><h2 id="teaching-title">{copy.teaching}</h2></div>
+  <div class="cv-section-body"><ol class="cv-entry-list">{profile.teaching.map((item) => <li class="cv-entry"><time datetime={item.date || item.from || undefined}>{period(item, locale)}</time><div>{t(item.role, locale) && <p class="cv-entry-kicker">{t(item.role, locale)}</p>}<h3>{t(item.title, locale)}</h3>{t(item.institution, locale) && <p class="cv-entry-meta">{t(item.institution, locale)}</p>}{t(item.description, locale) && <p>{t(item.description, locale)}</p>}</div></li>)}</ol></div>
+</section>}
+
+{profile.languages.length > 0 && <section id="languages" class="cv-section" aria-labelledby="languages-title" data-cv-section="languages">
+  <div class="cv-section-heading"><p>{numberFor("languages")}</p><h2 id="languages-title">{copy.languages}</h2></div>
+  <div class="cv-section-body"><ul class="cv-definition-list">{profile.languages.map((item) => <li><strong>{t(item.language, locale)}</strong>{t(item.proficiency, locale) && <span>{t(item.proficiency, locale)}</span>}</li>)}</ul></div>
+</section>}
+
+{profile.technical_skills.length > 0 && <section id="skills" class="cv-section" aria-labelledby="skills-title" data-cv-section="skills">
+  <div class="cv-section-heading"><p>{numberFor("skills")}</p><h2 id="skills-title">{copy.skills}</h2></div>
+  <div class="cv-section-body"><ul class="cv-definition-list">{profile.technical_skills.map((item) => <li><strong>{t(item.category, locale)}</strong><span>{list(item.items, locale).join(locale === "ja" ? "、" : ", ")}</span></li>)}</ul></div>
+</section>}
