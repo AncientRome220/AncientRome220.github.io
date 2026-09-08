@@ -167,7 +167,11 @@ const authorLine = (item: Publication) => list(item.authors, locale).join(locale
       const degree = profile.degrees.find((candidate) => candidate.date === item.to);
       return <li class="cv-entry">
         <time datetime={item.from ?? undefined}>{period(item, locale)}</time>
-        <div><p class="cv-entry-kicker">{degree ? t(degree.degree, locale) : copy.presentRole}</p><h3>{t(item.institution, locale)}</h3></div>
+        <div>
+          <p class="cv-entry-kicker">{degree ? t(degree.degree, locale) : copy.presentRole}</p>
+          <h3>{t(item.institution, locale)}</h3>
+          {t(item.note, locale) && <p class="cv-entry-detail">{t(item.note, locale)}</p>}
+        </div>
       </li>;
     })}
     {unpairedDegrees.map((degree) => <li class="cv-entry"><time datetime={degree.date}>{formatDate(degree.date, locale)}</time><div><p class="cv-entry-kicker">{t(degree.degree, locale)}</p><h3>{t(degree.institution, locale)}</h3></div></li>)}

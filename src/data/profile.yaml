@@ -108,6 +108,14 @@ research_areas:
     ja: エジプト学
     en: Egyptology
 education:
+- from: 2026-04
+  to: null
+  institution:
+    ja: 東京大学大学院人文社会系研究科 文化資源学研究専攻 文化資源学専門分野
+    en: Cultural Resources Studies, The University of Tokyo Graduate School of Humanities and Sociology
+  note:
+    ja: 東大—京大間大学院教育における大学間学生交流を利用。
+    en: Under the inter-university graduate exchange agreement between the University of Tokyo and Kyoto University.
 - from: 2025-04
   to: null
   institution:

@@ -20,6 +20,7 @@ export interface Degree {
 
 export interface Education extends DatedItem {
   institution: Localized;
+  note?: Localized;
 }
 
 export interface ResearchExperience extends DatedItem {
