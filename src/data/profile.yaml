@@ -1,5 +1,5 @@
 schema_version: 4
-last_reviewed: '2026-08-24'
+last_reviewed: '2026-09-08'
 identity:
   name:
     ja: 藤本 俊哉
@@ -73,16 +73,12 @@ research_interests:
   en: Digital Humanities
 - ja: 古代ローマ
   en: Ancient Roman
-- ja: 任意団体
-  en: Voluntary Associations
 - ja: TEI/XML
   en: TEI/XML
 - ja: LLM
   en: LLM
 - ja: null
   en: Python
-- ja: null
-  en: BERT
 research_areas:
 - discipline:
     ja: 人文・社会
@@ -323,6 +319,16 @@ publications:
   doi: null
   url: https://repository.kulib.kyoto-u.ac.jp/verify/9a9d4fd2-1c52-46e4-8ec2-476e6ac626bc
 presentations:
+- date: '2026-11-15'
+  event_period: 2026-11-14/2026-11-15
+  type: oral_presentation
+  title:
+    ja: null
+    en: '[Scheduled] What Counts as a Price? Grain Prices and Market Integration in the Arsinoite Nome, First and Second Centuries
+      CE'
+  event:
+    ja: null
+    en: 'TRIAD Workshop for Graduate Students of Classical Studies TRIAD 2026: Greece and the way thither'
 - date: '2026-05-16'
   type: poster_presentation
   title:
@@ -437,6 +443,17 @@ association_memberships:
     ja: 西洋古典学会
     en: The Classical Society of Japan
 social_contributions:
+- date: '2026-08-28'
+  role: lecturer
+  title:
+    ja: 文系×理系で挑む新しい歴史学：「デジタル・ヒューマニティーズ」の世界
+    en: 'A New Approach to History Bridging the Humanities and Sciences: Exploring the World of Digital Humanities'
+  event:
+    ja: 京都大学 学びコーディネーター
+    en: Kyoto University Learning Coordinator
+  location:
+    ja: 滋賀県立膳所高等学校
+    en: Zeze High School, Shiga
 - date: '2026-08-07'
   role: lecturer
   title:
@@ -472,6 +489,11 @@ social_contributions:
     ja: 京都大学百周年記念館 国際交流ホールI
     en: International Conference Hall I, Clock Tower Centennial Hall, Kyoto University
 other_activities:
+- from: 2026-08
+  to: 2026-08
+  title:
+    ja: null
+    en: 'From Fragments to a Price Series: Mining Grain Prices from the Papyri of Roman Egypt'
 - from: 2026-07
   to: 2026-07
   title:
