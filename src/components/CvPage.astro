@@ -5,7 +5,8 @@ import {
   linksFor,
   list,
   period,
-  presentationTypeLabel,
+  presentationLabel,
+  publicationNote,
   profile,
   publicationDetails,
   publicationTypeLabel,
@@ -26,11 +27,11 @@ const copy = {
     appointments: "研究歴",
     awards: "受賞・研究支援",
     publications: "研究業績",
-    presentations: "学会発表",
+    presentations: "研究発表",
     service: "学術活動・委員歴",
     engagement: "社会貢献",
     memberships: "所属学会",
-    other: "研修・その他の活動",
+    other: "研修歴",
     teaching: "教育歴",
     languages: "言語",
     skills: "技術・研究手法",
@@ -54,11 +55,11 @@ const copy = {
     appointments: "Research Appointments",
     awards: "Awards & Funding",
     publications: "Publications",
-    presentations: "Conference Presentations",
+    presentations: "Research Presentations",
     service: "Academic Service",
     engagement: "Public Engagement",
     memberships: "Academic Memberships",
-    other: "Training & Additional Activities",
+    other: "Training",
     teaching: "Teaching",
     languages: "Languages",
     skills: "Technical Skills & Methods",
@@ -200,6 +201,7 @@ const authorLine = (item: Publication) => list(item.authors, locale).join(locale
           <p class="cv-authors">{authorLine(item)}</p>
           <h4>“{t(item.title, locale)}”</h4>
           <p class="cv-entry-meta">{publicationDetails(item, locale)}</p>
+          {publicationNote(item, locale) && <p class="cv-entry-detail" data-publication-note>{publicationNote(item, locale)}.</p>}
           {(item.doi || item.url) && <p class="cv-entry-links">{item.doi && <a href={`https://doi.org/${item.doi}`}>DOI: {item.doi}</a>}{item.url && (!item.doi || item.url !== `https://doi.org/${item.doi}`) && <a href={item.url}>{locale === "ja" ? "本文・リポジトリ" : "Full text / Repository"}</a>}</p>}
         </div>
       </li>)}</ol>
@@ -212,8 +214,8 @@ const authorLine = (item: Publication) => list(item.authors, locale).join(locale
   <div class="cv-section-body"><ol class="cv-entry-list">{presentations.map((item) => {
     const related = linksFor(`Presentation, ${item.date}`);
     const coPresenters = list(item.co_presenters, locale);
-    return <li class="cv-entry" data-cv-record="presentation"><time datetime={item.date}>{formatDate(item.date, locale)}</time><div>
-      <p class="cv-entry-kicker">{presentationTypeLabel(item.type, locale)}</p>
+    return <li class="cv-entry" data-cv-record="presentation" data-presentation-status={item.status}><time datetime={item.date}>{formatDate(item.date, locale)}</time><div>
+      <p class="cv-entry-kicker">{presentationLabel(item, locale)}</p>
       <h3>{t(item.title, locale)}</h3>
       <p class="cv-entry-meta">{t(item.event, locale)}{t(item.location, locale) && ` · ${t(item.location, locale)}`}</p>
       {coPresenters.length > 0 && <p class="cv-entry-detail">{copy.coPresenters}: {coPresenters.join(locale === "ja" ? "、" : ", ")}</p>}
@@ -242,6 +244,7 @@ const authorLine = (item: Publication) => list(item.authors, locale).join(locale
   <div class="cv-section-body"><ol class="cv-entry-list">{profile.other_activities.map((item) => {
     const related = linksFor(`Other activity, ${item.date || item.from}`);
     return <li class="cv-entry"><time datetime={item.date || item.from || undefined}>{period(item, locale)}</time><div><h3>{t(item.title, locale)}</h3>
+      {t(item.description, locale) && <p class="cv-entry-detail">{t(item.description, locale)}</p>}
       {related.length > 0 && <p class="cv-entry-links">{related.map((file) => <a href={file.url}>{copy.materials}: {file.source_name}</a>)}</p>}
     </div></li>;
   })}</ol></div>

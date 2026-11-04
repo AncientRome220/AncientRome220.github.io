@@ -45,6 +45,7 @@ export interface AssociationMembership extends DatedItem {
 
 export interface Publication {
   bibliography_key: string;
+  english_title_kind?: string;
   category: string;
   date: string;
   authors: LocalizedList;
@@ -63,6 +64,7 @@ export interface Publication {
 }
 
 export interface Presentation {
+  status?: string;
   date: string;
   event_period?: string | null;
   type: string;
@@ -81,6 +83,9 @@ export interface SocialContribution extends DatedItem {
 
 export interface OtherActivity extends DatedItem {
   title: Localized;
+  category?: string;
+  description?: Localized;
+  completion_status?: string;
 }
 
 export interface TeachingEntry extends DatedItem {
@@ -196,7 +201,9 @@ const publicationTypeLabels: Record<string, Record<Locale, string>> = {
 
 const presentationTypeLabels: Record<string, Record<Locale, string>> = {
   oral_presentation: { ja: "口頭発表", en: "Oral presentation" },
-  poster_presentation: { ja: "ポスター発表", en: "Poster presentation" }
+  poster_presentation: { ja: "ポスター発表", en: "Poster presentation" },
+  seminar_presentation: { ja: "ゼミ発表", en: "Seminar presentation" },
+  workshop_presentation: { ja: "研究会発表", en: "Workshop presentation" }
 };
 
 export function publicationTypeLabel(category: string, locale: Locale): string {
@@ -205,6 +212,18 @@ export function publicationTypeLabel(category: string, locale: Locale): string {
 
 export function presentationTypeLabel(type: string, locale: Locale): string {
   return presentationTypeLabels[type]?.[locale] ?? type.replaceAll("_", " ");
+}
+
+export function presentationLabel(item: Presentation, locale: Locale): string {
+  const type = presentationTypeLabel(item.type, locale);
+  return item.status === "scheduled" ? `${locale === "ja" ? "発表予定" : "Scheduled"} · ${type}` : type;
+}
+
+export function publicationNote(item: Publication, locale: Locale): string {
+  if (locale !== "en") return "";
+  return [item.language === "jpn" || item.language === "ja" ? "In Japanese" : "",
+    item.english_title_kind === "descriptive_translation" ? "English title is a descriptive translation" : ""
+  ].filter(Boolean).join(". ");
 }
 
 export function linksFor(relatedTo: string): Attachment[] {

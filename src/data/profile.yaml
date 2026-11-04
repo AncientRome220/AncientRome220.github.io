@@ -1,5 +1,5 @@
 schema_version: 4
-last_reviewed: '2026-09-08'
+last_reviewed: '2026-11-04'
 identity:
   name:
     ja: 藤本 俊哉
@@ -226,6 +226,8 @@ publications:
   corresponding_author: true
   doi: null
   url: null
+  status: published
+  english_title_kind: descriptive_translation
 - bibliography_key: fujimoto2025masterThesis
   category: master_thesis
   date: 2025-03
@@ -250,6 +252,8 @@ publications:
   corresponding_author: false
   doi: null
   url: null
+  status: completed
+  english_title_kind: descriptive_translation
 - bibliography_key: fujimoto2026chaniotisReview
   category: book_review
   date: 2026-05
@@ -260,7 +264,8 @@ publications:
     - Shunya Fujimoto
   title:
     ja: ＜書評＞アンゲロス・ハニオティス（藤井崇訳）『アレクサンドロス以後―長いヘレニズムとギリシア世界―』
-    en: null
+    en: 'Review of Angelos Chaniotis, After Alexander: The Long Hellenistic Age and the Greek World (Japanese translation
+      by Takashi Fujii)'
   venue:
     ja: 史林
     en: Shirin
@@ -274,6 +279,8 @@ publications:
   corresponding_author: false
   doi: null
   url: null
+  status: published
+  english_title_kind: descriptive_translation
 - bibliography_key: fujimoto2025reggianiReview
   category: book_review
   date: '2025-12-25'
@@ -300,6 +307,8 @@ publications:
   corresponding_author: false
   doi: 10.17983/300514
   url: https://doi.org/10.17983/300514
+  status: published
+  english_title_kind: descriptive_translation
 - bibliography_key: fujimoto2023gabrielsenReview
   category: book_review
   date: 2023-12
@@ -326,21 +335,42 @@ publications:
   corresponding_author: false
   doi: null
   url: https://repository.kulib.kyoto-u.ac.jp/verify/9a9d4fd2-1c52-46e4-8ec2-476e6ac626bc
+  status: published
+  english_title_kind: descriptive_translation
 presentations:
 - date: '2026-11-15'
   event_period: 2026-11-14/2026-11-15
   type: oral_presentation
   title:
     ja: null
-    en: '[Scheduled] What Counts as a Price? Grain Prices and Market Integration in the Arsinoite Nome, First and Second Centuries
-      CE'
+    en: What Counts as a Price? Grain Prices and Market Integration in the Arsinoite Nome, First and Second Centuries CE
   event:
     ja: null
     en: 'TRIAD Workshop for Graduate Students of Classical Studies TRIAD 2026: Greece and the way thither'
+  status: scheduled
+- date: '2026-10-23'
+  type: seminar_presentation
+  title:
+    en: Wheat Prices and State Procurement in Roman Egypt
+  event:
+    en: Kyoto University Ancient History Seminar
+  status: presented
+- date: 2026-08
+  type: workshop_presentation
+  title:
+    ja: null
+    en: 'From Fragments to a Price Series: Mining Grain Prices from the Papyri of Roman Egypt'
+  event:
+    ja: 小規模研究会
+    en: Research workshop
+  location:
+    ja: 東京大学
+    en: The University of Tokyo
+  status: presented
 - date: '2026-05-16'
   type: poster_presentation
   title:
-    ja: ルールベース手法とLLMによる古文書からの経済情報抽出の比較――ローマ帝政期エジプトを事例に――
+    ja: ルールベース手法とLLMによる古文書からの経済情報抽出の比較ーローマ帝政期エジプトを事例にー
     en: 'A Comparison of Rule-Based and LLM-Based Extraction of Economic Information from Ancient Documents: A Case Study
       of Grain Prices in Roman Egypt'
   event:
@@ -353,6 +383,7 @@ presentations:
     en:
     - Tadamichi Abe
     - Jun Ogawa
+  status: presented
 - date: '2026-02-28'
   type: poster_presentation
   title:
@@ -371,6 +402,7 @@ presentations:
   location:
     ja: 国立民族学博物館
     en: National Museum of Ethnology
+  status: presented
 - date: '2025-11-08'
   event_period: 2025-11-07/2025-11-09
   type: oral_presentation
@@ -380,6 +412,7 @@ presentations:
   event:
     ja: null
     en: The Triad Workshop for Graduate Students of Classical Studies
+  status: presented
 - date: '2025-11-03'
   type: oral_presentation
   title:
@@ -389,6 +422,7 @@ presentations:
   event:
     ja: 第93回読書会大会
     en: The 93rd Dokusho-kai Conference
+  status: presented
 - date: '2025-06-07'
   event_period: 2025-06-07/2025-06-08
   type: poster_presentation
@@ -398,6 +432,7 @@ presentations:
   event:
     ja: 日本西洋古典学会第75回大会
     en: The Classical Society of Japan, 75th Annual Conference
+  status: presented
 - date: '2024-06-29'
   type: oral_presentation
   title:
@@ -406,14 +441,16 @@ presentations:
   event:
     ja: アコリス考古学プロジェクト公開シンポジウム
     en: Public Symposium of the Akoris Archaeology Project
+  status: presented
 - date: '2022-10-14'
-  type: oral_presentation
+  type: seminar_presentation
   title:
     ja: null
     en: Evergetism in Ancient Sicily
   event:
     ja: null
     en: Kyoto University Ancient History Seminar
+  status: presented
 association_memberships:
 - from: 2026-04
   to: null
@@ -451,6 +488,14 @@ association_memberships:
     ja: 西洋古典学会
     en: The Classical Society of Japan
 social_contributions:
+- date: '2026-10-22'
+  role: lecturer
+  title:
+    ja: 文系×理系で挑む新しい歴史学：「デジタル・ヒューマニティーズ」の世界
+    en: 'A New Approach to History Bridging the Humanities and Sciences: Exploring the World of Digital Humanities'
+  event:
+    ja: 京都大学 学びコーディネーター
+    en: Kyoto University Learning Coordinator
 - date: '2026-08-28'
   role: lecturer
   title:
@@ -497,13 +542,14 @@ social_contributions:
     ja: 京都大学百周年記念館 国際交流ホールI
     en: International Conference Hall I, Clock Tower Centennial Hall, Kyoto University
 other_activities:
-- from: 2026-08
-  to: 2026-08
-  title:
-    ja: null
-    en: 'From Fragments to a Price Series: Mining Grain Prices from the Papyri of Roman Egypt'
 - from: 2026-07
   to: 2026-07
   title:
     ja: null
     en: The Leiden Summer School in Languages and Linguistics
+  category: training
+  description:
+    ja: パピルス学の授業を受講・修了。
+    en: Completed coursework in papyrology.
+  completion_status: completed
+  certificate: certificate_of_participation

@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CvPage from "./CvPage.astro";
 import { messages, pageRoutes, type Locale, type PageKey } from "../lib/i18n";
-import { linksFor, list, period, profile, publicationDetails, t } from "../lib/data";
+import { linksFor, list, period, presentationLabel, profile, publicationDetails, publicationNote, publicationTypeLabel, t } from "../lib/data";
 
 interface Props { locale: Locale; page: PageKey }
 const { locale, page } = Astro.props;
@@ -92,10 +92,11 @@ const pageTitle = msg.titles[page];
               <article>
                 <div class="record-date"><time datetime={item.date}>{item.date}</time></div>
                 <div>
-                  <p class="record-type">{item.category.replaceAll("_", " ")}{item.peer_reviewed ? ` · ${msg.peerReviewed}` : ""}</p>
+                  <p class="record-type">{publicationTypeLabel(item.category, locale)}{item.peer_reviewed ? ` · ${msg.peerReviewed}` : ""}</p>
                   <h3>{t(item.title, locale)}</h3>
                   <p>{list(item.authors, locale).join(locale === "ja" ? "、" : ", ")}</p>
                   <p class="citation-detail">{publicationDetails(item, locale)}</p>
+                  {publicationNote(item, locale) && <p class="citation-detail" data-publication-note>{publicationNote(item, locale)}.</p>}
                   {(item.doi || item.url) && <p class="record-links">
                     {item.doi && <a href={`https://doi.org/${item.doi}`}>{msg.doi}: {item.doi}<span aria-hidden="true"> ↗</span></a>}
                     {item.url && (!item.doi || item.url !== `https://doi.org/${item.doi}`) && <a href={item.url}>{msg.repository}<span aria-hidden="true"> ↗</span></a>}
@@ -117,7 +118,7 @@ const pageTitle = msg.titles[page];
         <ol class="record-list dated-records">
           {presentations.map((item: any) => {
             const related = linksFor(`Presentation, ${item.date}`);
-            return <li><article><time datetime={item.date}>{item.date}</time><h3>{t(item.title, locale)}</h3><p>{t(item.event, locale)}</p>{list(item.co_presenters, locale).length > 0 && <p>{locale === "ja" ? "共同発表者" : "Co-presenters"}: {list(item.co_presenters, locale).join(locale === "ja" ? "、" : ", ")}</p>}{related.length > 0 && <p class="record-links">{related.map((file) => <a href={file.url}>{msg.materials}: {file.source_name}<span aria-hidden="true"> ↗</span></a>)}</p>}</article></li>;
+            return <li><article data-presentation-status={item.status}><time datetime={item.date}>{item.date}</time><p class="record-type">{presentationLabel(item, locale)}</p><h3>{t(item.title, locale)}</h3><p>{t(item.event, locale)}{t(item.location, locale) && ` · ${t(item.location, locale)}`}</p>{list(item.co_presenters, locale).length > 0 && <p>{locale === "ja" ? "共同発表者" : "Co-presenters"}: {list(item.co_presenters, locale).join(locale === "ja" ? "、" : ", ")}</p>}{related.length > 0 && <p class="record-links">{related.map((file) => <a href={file.url}>{msg.materials}: {file.source_name}<span aria-hidden="true"> ↗</span></a>)}</p>}</article></li>;
           })}
         </ol>
       </section>

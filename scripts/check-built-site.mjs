@@ -8,8 +8,9 @@ const pages = [
   "index.html", "research/index.html", "publications/index.html", "activities/index.html", "cv/index.html",
   "en/index.html", "en/research/index.html", "en/publications/index.html", "en/activities/index.html", "en/cv/index.html", "404.html"
 ];
-const privatePatterns = [/rm_researchers/i, /\.jsonl/i, /contact_point/i, /internal_id/i, /exports[\\/]/i];
+const privatePatterns = [/cv_editorial/i, /owner_confirmations/i, /rm_researchers/i, /\.jsonl/i, /contact_point/i, /internal_id/i, /exports[\\/]/i];
 const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
+/** @type {import("../src/lib/data").Profile} */
 const profile = parse(await readFile(resolve(root, "src/data/profile.yaml"), "utf8"));
 const publicEmail = profile?.public_contact?.email;
 const emailPages = new Set(["index.html", "en/index.html", "cv/index.html", "en/cv/index.html"]);
@@ -69,6 +70,25 @@ for (const pattern of privatePatterns) if (pattern.test(builtText)) failures.pus
 const jaCount = (htmlFiles.find(([page]) => page === "publications/index.html")?.[1].match(/<article>/g) ?? []).length;
 const enCount = (htmlFiles.find(([page]) => page === "en/publications/index.html")?.[1].match(/<article>/g) ?? []).length;
 if (jaCount !== enCount || jaCount !== 5) failures.push(`publication count mismatch: ja=${jaCount}, en=${enCount}`);
+for (const locale of ["ja", "en"]) {
+  const prefix = locale === "ja" ? "" : "en/";
+  const scheduled = profile.presentations.filter((item) => item.status === "scheduled").length;
+  for (const route of ["cv", "activities"]) {
+    const html = htmlFiles.find(([page]) => page === `${prefix}${route}/index.html`)?.[1] ?? "";
+    const count = (html.match(/data-presentation-status="scheduled"/g) ?? []).length;
+    if (count !== scheduled || (scheduled && !html.includes(locale === "ja" ? "発表予定" : "Scheduled"))) failures.push(`missing scheduled presentation labels: ${prefix}${route}`);
+    if (!html.includes("https://researchmap.jp/shunyafujimoto/others/54799524/attachment_file.pdf")) failures.push(`missing workshop attachment: ${prefix}${route}`);
+    if (!html.includes(locale === "ja" ? "研究会発表" : "Workshop presentation")) failures.push(`missing workshop classification: ${prefix}${route}`);
+  }
+  const cv = htmlFiles.find(([page]) => page === `${prefix}cv/index.html`)?.[1] ?? "";
+  if (!cv.includes(locale === "ja" ? "パピルス学の授業を受講・修了。" : "Completed coursework in papyrology.")) failures.push(`missing completed training: ${prefix}cv`);
+}
+const translations = profile.publications.filter((item) => item.english_title_kind === "descriptive_translation").length;
+for (const route of ["cv", "publications"]) {
+  const html = htmlFiles.find(([page]) => page === `en/${route}/index.html`)?.[1] ?? "";
+  if ((html.match(/English title is a descriptive translation/g) ?? []).length !== translations) failures.push(`missing descriptive translation notes: en/${route}`);
+  if ((html.match(/In Japanese/g) ?? []).length !== profile.publications.filter((item) => ["ja", "jpn"].includes(item.language)).length) failures.push(`missing publication language: en/${route}`);
+}
 const cvPages = htmlFiles.filter(([page]) => page === "cv/index.html" || page === "en/cv/index.html");
 for (const [page, html] of cvPages) {
   const publicationCount = (html.match(/data-cv-record="publication"/g) ?? []).length;

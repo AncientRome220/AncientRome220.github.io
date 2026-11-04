@@ -1,9 +1,9 @@
 schema_version: 1
-last_reviewed: '2026-09-08'
+last_reviewed: '2026-11-04'
 files:
-- related_to: Other activity, 2026-08
+- related_to: Presentation, 2026-08
   source_name: main.pdf
-  recommended_path: other-activities/2026-08_fragments-to-price-series.pdf
+  recommended_path: presentations/2026-08_fragments-to-price-series.pdf
   url: https://researchmap.jp/shunyafujimoto/others/54799524/attachment_file.pdf
 - related_to: Social contribution, 2026-08-28
   source_name: 20260828膳所高校_スライド.pdf
