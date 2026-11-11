@@ -219,7 +219,10 @@ const authorLine = (item: Publication) => list(item.authors, locale).join(locale
       <h3>{t(item.title, locale)}</h3>
       <p class="cv-entry-meta">{t(item.event, locale)}{t(item.location, locale) && ` · ${t(item.location, locale)}`}</p>
       {coPresenters.length > 0 && <p class="cv-entry-detail">{copy.coPresenters}: {coPresenters.join(locale === "ja" ? "、" : ", ")}</p>}
-      {related.length > 0 && <p class="cv-entry-links">{related.map((file) => <a href={file.url}>{copy.materials}: {file.source_name}</a>)}</p>}
+      {(item.materials_url || related.length > 0) && <p class="cv-entry-links">
+        {item.materials_url && <a href={item.materials_url}>{locale === "ja" ? "発表資料（スライド・PDF）" : "Presentation materials (slides & PDF)"}</a>}
+        {related.map((file) => <a href={file.url}>{copy.materials}: {file.source_name}</a>)}
+      </p>}
     </div></li>;
   })}</ol></div>
 </section>}

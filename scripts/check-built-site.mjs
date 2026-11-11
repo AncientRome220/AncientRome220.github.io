@@ -75,6 +75,14 @@ for (const locale of ["ja", "en"]) {
   const scheduled = profile.presentations.filter((item) => item.status === "scheduled").length;
   for (const route of ["cv", "activities"]) {
     const html = htmlFiles.find(([page]) => page === `${prefix}${route}/index.html`)?.[1] ?? "";
+    const triadUrl = "https://ancientrome220.github.io/talks/triad-2026/";
+    const presentationRecords = html.match(/<(?:article|li)\b[^>]*data-presentation-status="[^"]*"[^>]*>[\s\S]*?<\/(?:article|li)>/g) ?? [];
+    const triadRecord = presentationRecords.find((record) => record.includes('datetime="2026-11-15"')) ?? "";
+    const materialLabel = locale === "ja" ? "発表資料（スライド・PDF）" : "Presentation materials (slides &amp; PDF)";
+    const triadLink = `href="${triadUrl}"`;
+    if (!triadRecord.includes("TRIAD 2026") || !triadRecord.includes(triadLink) || !triadRecord.includes(materialLabel) || html.split(triadLink).length !== 2) {
+      failures.push(`missing or misplaced TRIAD 2026 materials link: ${prefix}${route}`);
+    }
     const count = (html.match(/data-presentation-status="scheduled"/g) ?? []).length;
     if (count !== scheduled || (scheduled && !html.includes(locale === "ja" ? "発表予定" : "Scheduled"))) failures.push(`missing scheduled presentation labels: ${prefix}${route}`);
     if (!html.includes("https://researchmap.jp/shunyafujimoto/others/54799524/attachment_file.pdf")) failures.push(`missing workshop attachment: ${prefix}${route}`);

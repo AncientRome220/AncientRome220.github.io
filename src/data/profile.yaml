@@ -347,6 +347,7 @@ presentations:
   event:
     ja: null
     en: 'TRIAD Workshop for Graduate Students of Classical Studies TRIAD 2026: Greece and the way thither'
+  materials_url: https://ancientrome220.github.io/talks/triad-2026/
   status: scheduled
 - date: '2026-10-23'
   type: seminar_presentation

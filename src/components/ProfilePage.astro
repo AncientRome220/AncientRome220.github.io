@@ -116,9 +116,9 @@ const pageTitle = msg.titles[page];
       <section class="section-grid ruled-section" aria-labelledby="presentations-title">
         <div><p class="section-number">01</p><h2 id="presentations-title">{msg.presentations}</h2></div>
         <ol class="record-list dated-records">
-          {presentations.map((item: any) => {
+          {presentations.map((item) => {
             const related = linksFor(`Presentation, ${item.date}`);
-            return <li><article data-presentation-status={item.status}><time datetime={item.date}>{item.date}</time><p class="record-type">{presentationLabel(item, locale)}</p><h3>{t(item.title, locale)}</h3><p>{t(item.event, locale)}{t(item.location, locale) && ` · ${t(item.location, locale)}`}</p>{list(item.co_presenters, locale).length > 0 && <p>{locale === "ja" ? "共同発表者" : "Co-presenters"}: {list(item.co_presenters, locale).join(locale === "ja" ? "、" : ", ")}</p>}{related.length > 0 && <p class="record-links">{related.map((file) => <a href={file.url}>{msg.materials}: {file.source_name}<span aria-hidden="true"> ↗</span></a>)}</p>}</article></li>;
+            return <li><article data-presentation-status={item.status}><time datetime={item.date}>{item.date}</time><p class="record-type">{presentationLabel(item, locale)}</p><h3>{t(item.title, locale)}</h3><p>{t(item.event, locale)}{t(item.location, locale) && ` · ${t(item.location, locale)}`}</p>{list(item.co_presenters, locale).length > 0 && <p>{locale === "ja" ? "共同発表者" : "Co-presenters"}: {list(item.co_presenters, locale).join(locale === "ja" ? "、" : ", ")}</p>}{(item.materials_url || related.length > 0) && <p class="record-links">{item.materials_url && <a href={item.materials_url}>{locale === "ja" ? "発表資料（スライド・PDF）" : "Presentation materials (slides & PDF)"}</a>}{related.map((file) => <a href={file.url}>{msg.materials}: {file.source_name}<span aria-hidden="true"> ↗</span></a>)}</p>}</article></li>;
           })}
         </ol>
       </section>

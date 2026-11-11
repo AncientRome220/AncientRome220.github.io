@@ -65,6 +65,7 @@ export interface Publication {
 
 export interface Presentation {
   status?: string;
+  materials_url?: string;
   date: string;
   event_period?: string | null;
   type: string;
