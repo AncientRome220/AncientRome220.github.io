@@ -27,3 +27,16 @@ The synchronizer copies only explicitly allowed profile fields, the approved pub
 ## Deployment
 
 Pushing `main` starts `.github/workflows/deploy.yml`. GitHub Actions builds with Node.js 24 and deploys to GitHub Pages. Generated `dist/` is not committed.
+
+## TRIAD 2026 presentation
+
+The audience page is `/talks/triad-2026/`. Its `public/talks/triad-2026/`
+folder contains only `index.html`, `slides.html`, and `slides.pdf`.
+The complete 27-slide deck includes references and backups; presenter notes
+are removed from the public HTML. Each slide links to the same stable page.
+
+Update these three files together using the TRIAD project's checked audience
+export. Keep editable manuscripts, slide source, speech, research materials,
+and private export manifests outside this public repository. The profile
+synchronization remains independent. `npm run verify` also checks this export's
+file allowlist, slide and QR counts, embedded assets, and private-note markers.

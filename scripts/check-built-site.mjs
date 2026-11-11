@@ -104,3 +104,5 @@ for (const [page, html] of cvPages) {
 }
 if (failures.length) { console.error(failures.join("\n")); process.exit(1); }
 console.log(`Verified ${pages.length} HTML files, bilingual parity, internal links, metadata, and privacy guards.`);
+
+await import("./check-triad.mjs");
