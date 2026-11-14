@@ -17,8 +17,8 @@ for (const folder of ['public','dist']) {
   assert.ok(landing.includes(`<link rel="canonical" href="${url}">`));
   assert.equal((landing.match(/<h1[ >]/g)||[]).length,1);
   for (const file of ['slides.html','slides.pdf']) assert.ok(landing.includes(`href="${file}"`));
-  assert.equal((slides.match(/<section\b(?=[^>]*\bid="[^"]+")(?=[^>]*class="[^"]*\bslide\b)[^>]*>/g)||[]).length,27);
-  assert.equal((slides.match(/class="slide-access(?: slide-access-large)?"/g)||[]).length,27);
+  assert.equal((slides.match(/<section\b(?=[^>]*\bid="[^"]+")(?=[^>]*class="[^"]*\bslide\b)[^>]*>/g)||[]).length,28);
+  assert.equal((slides.match(/class="slide-access(?: slide-access-large)?"/g)||[]).length,28);
   assert.equal((slides.match(/class="slide-access slide-access-large"/g)||[]).length,2);
   assert.doesNotMatch(slides,/<(?:aside|div)\b[^>]*class="[^"]*\bnotes\b/i);
   assert.doesNotMatch(slides,/\sdata-notes\s*=/i);
@@ -31,4 +31,4 @@ for (const folder of ['public','dist']) {
   assert.ok(pdf.subarray(0,5).toString()==='%PDF-');
 }
 for (const name of names) assert.ok((await readFile(resolve(root,'public',route,name))).equals(await readFile(resolve(root,'dist',route,name))),`Build changed ${name}`);
-console.log('Verified TRIAD landing page, 27-slide audience export, QR links, file allowlist and privacy guards.');
+console.log('Verified TRIAD landing page, 28-slide audience export, QR links, file allowlist and privacy guards.');

@@ -32,7 +32,7 @@ Pushing `main` starts `.github/workflows/deploy.yml`. GitHub Actions builds with
 
 The audience page is `/talks/triad-2026/`. Its `public/talks/triad-2026/`
 folder contains only `index.html`, `slides.html`, and `slides.pdf`.
-The complete 27-slide deck includes references and backups; presenter notes
+The complete 28-slide deck includes references and backups; presenter notes
 are removed from the public HTML. Each slide links to the same stable page.
 
 Update these three files together using the TRIAD project's checked audience
