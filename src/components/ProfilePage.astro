@@ -113,6 +113,12 @@ const pageTitle = msg.titles[page];
   {page === "activities" && (
     <>
       <header class="page-heading ruled-section"><p class="eyebrow">Activities</p><h1>{pageTitle}</h1></header>
+      <section class="section-grid ruled-section" aria-labelledby="conference-notes">
+        <h2 id="conference-notes">{locale === "ja" ? "研究ノート" : "Research notes"}</h2>
+        <p><a href={locale === "ja" ? "/notes/ai-history-2026/" : "/en/notes/ai-history-2026/"}>
+          {locale === "ja" ? "AI and History Conference 2026 報告要約" : "A Reader’s Guide to the AI and History Conference 2026"}
+        </a></p>
+      </section>
       <section class="section-grid ruled-section" aria-labelledby="presentations-title">
         <div><p class="section-number">01</p><h2 id="presentations-title">{msg.presentations}</h2></div>
         <ol class="record-list dated-records">

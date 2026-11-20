@@ -1,0 +1,80 @@
+---
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  frontmatter: { title: string; reviewed: string };
+  headings: MarkdownHeading[];
+}
+const { frontmatter, headings } = Astro.props;
+const reports = headings.filter((item) => item.depth === 2);
+const english = Astro.url.pathname.startsWith("/en/");
+const locale = english ? "en" : "ja";
+const guide = "/notes/ai-history-2026/";
+const description = english
+  ? "A guide to 27 sessions on AI and historical practice, with research questions, evidence, open questions, and links to the recordings."
+  : "AI and History Conference 2026の全27報告を日本語で紹介。研究の背景、手法、検証、残された問いを、公式記録と録画の該当箇所からたどれます。";
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="alternate" hreflang="ja" href={new URL(guide, Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(`/en${guide}`, Astro.site)} />
+    <title>{frontmatter.title} | {english ? "Shunya Fujimoto" : "藤本俊哉"}</title>
+    <style is:inline>
+      :root { color-scheme: light; --ink: #10233f; --rule: #c8cac7; --accent: #804422; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #faf9f5; color: var(--ink); font: 1rem/1.85 "Yu Gothic", Meiryo, sans-serif; }
+      main, .masthead { width: min(62rem, 92%); margin: auto; }
+      .masthead { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+      a { color: #234f67; text-underline-offset: .2em; }
+      a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      h1, h2 { font-family: "Yu Mincho", "Hiragino Mincho ProN", Georgia, serif; line-height: 1.45; text-wrap: pretty; }
+      h1 { max-width: 22em; margin: .45rem 0; font-size: clamp(1.9rem, 5vw, 3.3rem); }
+      h2 { border-top: 2px solid var(--ink); padding-top: 1.5rem; margin: 3.5rem 0 .4rem; font-size: clamp(1.35rem, 3vw, 1.95rem); scroll-margin-top: 1rem; }
+      .heading { padding-top: 2rem; }
+      .date, h2 + p { color: #4b5360; font-size: .9rem; }
+      .contents { margin: 1.5rem 0; padding: .8rem 1rem; border: 1px solid var(--rule); }
+      summary { cursor: pointer; font-weight: bold; }
+      .contents ul { padding-left: 1.4rem; }
+      .contents li { margin: .35em 0; }
+      table { width: 100%; border-collapse: collapse; line-break: strict; overflow-wrap: anywhere; }
+      th, td { border-top: 1px solid var(--rule); padding: .75rem .65rem; text-align: left; vertical-align: top; }
+      th { background: #efeee8; font-size: .85rem; }
+      td:first-child { width: 12rem; font-weight: bold; font-size: .92rem; }
+      table a { white-space: nowrap; font-size: .85em; }
+      footer { margin: 3rem 0; border-top: 1px solid var(--rule); padding-top: 1rem; }
+      @media (max-width: 42rem) {
+        table, tbody, tr, td { display: block; }
+        thead { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; }
+        td { border: 0; padding: 0 0 .7rem; }
+        td:first-child { width: auto; padding: .55rem 0 .15rem; color: var(--accent); border-top: 1px solid var(--rule); }
+      }
+      @media print { .masthead, .contents, footer { display: none; } tr, h2 { break-inside: avoid; } h2 { break-after: avoid; } }
+    </style>
+  </head>
+  <body>
+    <header class="masthead">
+      <a href="../../activities/index.html">{english ? "Shunya Fujimoto · Activities" : "藤本俊哉　研究活動"}</a>
+      <a href={english ? "../../../notes/ai-history-2026/index.html" : "../../en/notes/ai-history-2026/index.html"}
+         lang={english ? "ja" : "en"} hreflang={english ? "ja" : "en"}>{english ? "日本語" : "English"}</a>
+    </header>
+    <main>
+      <header class="heading">
+        <h1>{frontmatter.title}</h1>
+        <p class="date">{english ? "Sources checked " : "資料確認日　"}<time datetime={frontmatter.reviewed}>{frontmatter.reviewed}</time></p>
+      </header>
+      <details class="contents" id="contents">
+        <summary>{english ? `Browse the ${reports.length} sessions` : `報告を選ぶ（${reports.length}件）`}</summary>
+        <nav aria-label={english ? "Session contents" : "報告の目次"}><ul>
+          {reports.map((item) => <li><a href={`#${item.slug}`}>{item.text}</a></li>)}
+        </ul></nav>
+      </details>
+      <slot />
+      <footer><a href="#contents">{english ? "Return to session contents" : "報告の目次へ戻る"}</a></footer>
+    </main>
+  </body>
+</html>
