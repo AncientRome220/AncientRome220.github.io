@@ -24,6 +24,8 @@ const externalProfiles = [
   ["GitHub", profile.identity.public_identifiers.github_url]
 ];
 const pageTitle = msg.titles[page];
+const guideUrl = locale === "ja" ? "/notes/ai-history-2026/" : "/en/notes/ai-history-2026/";
+const guideTitle = locale === "ja" ? "AI and History Conference 2026 報告要約" : "A Reader’s Guide to the AI and History Conference 2026";
 ---
 
 <BaseLayout {locale} {page}>
@@ -38,6 +40,12 @@ const pageTitle = msg.titles[page];
         <div class="hero-actions">
           <a class="button" href={pageRoutes[locale].research}>{msg.nav.research}</a>
           <a class="text-link" href={pageRoutes[locale].publications}>{msg.nav.publications} →</a>
+        </div>
+        <div class="guide-feature">
+          <h2><a href={guideUrl}>{guideTitle}</a></h2>
+          <p>{locale === "ja"
+            ? "全27報告で使われた史料と手法、示された根拠、残された問いを、録画の該当箇所とともに紹介します。"
+            : "Explore the sources, methods, evidence, and open questions across 27 sessions, with links to the relevant moments in each recording."}</p>
         </div>
       </section>
 
@@ -115,9 +123,7 @@ const pageTitle = msg.titles[page];
       <header class="page-heading ruled-section"><p class="eyebrow">Activities</p><h1>{pageTitle}</h1></header>
       <section class="section-grid ruled-section" aria-labelledby="conference-notes">
         <h2 id="conference-notes">{locale === "ja" ? "研究ノート" : "Research notes"}</h2>
-        <p><a href={locale === "ja" ? "/notes/ai-history-2026/" : "/en/notes/ai-history-2026/"}>
-          {locale === "ja" ? "AI and History Conference 2026 報告要約" : "A Reader’s Guide to the AI and History Conference 2026"}
-        </a></p>
+        <p><a href={guideUrl}>{guideTitle}</a></p>
       </section>
       <section class="section-grid ruled-section" aria-labelledby="presentations-title">
         <div><p class="section-number">01</p><h2 id="presentations-title">{msg.presentations}</h2></div>
