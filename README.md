@@ -18,8 +18,8 @@ Before publishing, run `npm run verify`. It checks Astro/TypeScript, creates the
 The private `research-profile` repository is the source of truth. Do not edit `src/data/` or `public/downloads/publications.bib` directly. From the private repository, run:
 
 ```powershell
-python site/sync_public.py --target C:\research\AncientRome220.github.io --check
-python site/sync_public.py --target C:\research\AncientRome220.github.io --write
+python site/sync_public.py --target C:\research\profile\AncientRome220.github.io --check
+python site/sync_public.py --target C:\research\profile\AncientRome220.github.io --write
 ```
 
 The synchronizer copies only explicitly allowed profile fields, the approved public contact email, public attachment URLs, and public BibTeX. It never copies raw researchmap exports, other contact details, or attachment bodies.
